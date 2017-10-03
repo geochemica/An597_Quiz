@@ -22,8 +22,7 @@ df
 
 #For some reason it is saying that curl is invalid, so I don't know if this is going to work; I'll update once this quiz is finished. 
 #Also once again, it has disconnected from the project. The time that this quiz ended is: 3:55
-```{r}
-
+```{r, eval=FALSE}
 library(dplyr)
 df %>% 
 s<-select(first_name, last_name, gender, height, weight, zombies_killed)
