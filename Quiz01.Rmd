@@ -6,6 +6,7 @@ output: html_document
 ---
 
 #I could not push this to github. I had it opened on my desktop but it would not let me push it. 
+
 ```{r}
 library(curl)
 f <- f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN597_Fall17/zombies.csv")
@@ -15,5 +16,28 @@ head(d)
 library(dplyr)
 df<-f
 df
+
+```
+###Quiz 2
+
+#For some reason it is saying that curl is invalid, so I don't know if this is going to work; I'll update once this quiz is finished. 
+#Also once again, it has disconnected from the project. The time that this quiz ended is: 3:55
+```{r}
+
+library(dplyr)
+df %>% 
+s<-select(first_name, last_name, gender, height, weight, zombies_killed)
+
+s1<-s %>%
+  filter(gender == "Female")
+
+s1 %>% 
+  mutate("over 5'5"=$height≥65, 
+         "under 5'5"$height<65)
+
+
+library(ggplot2)
+mydata<-s1
+p <-ggplot(mydata, aes(Number of Zombies Killed, Height))
 
 ```
