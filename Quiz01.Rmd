@@ -67,8 +67,9 @@ dt
 
 g<-data.frame(dt, dt$gender, dt$years_of_education, dt$major, dt$age)
 g
-as.factor(g$gender)
-#making gender a factor so that I can color it
+
+g<-subset(g, g$major == "medical/nursing")
+g
 
 ```
 ```{r}
