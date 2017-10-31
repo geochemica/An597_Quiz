@@ -14,8 +14,8 @@ d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
 head(d)
 
 library(dplyr)
-df<-f
-df
+dt<-as.data.frame(d)
+dt
 
 ```
 ###Quiz 2
@@ -24,19 +24,58 @@ df
 #Also once again, it has disconnected from the project. The time that this quiz ended is: 3:55
 ```{r, eval=FALSE}
 library(dplyr)
-df %>% 
-s<-select(first_name, last_name, gender, height, weight, zombies_killed)
+g<-data.frame(dt$first_name, dt$last_name, dt$gender, dt$height, dt$weight, dt$zombies_killed)
+g
 
-s1<-s %>%
-  filter(gender == "Female")
+s<-subset(g, g$dt.gender == "Female")
+s
+  
+s1<-mutate(s,s$dt.height>65 & s$dt.height<65)
 
-s1 %>% 
-  mutate("over 5'5"=$height≥65, 
-         "under 5'5"$height<65)
-
+s1<-if(d$height>65){
+  label("over five foot five inches")
+}
+s1<-if(d$height<65){
+  print("under five foot five inches")
+}
 
 library(ggplot2)
-mydata<-s1
-p <-ggplot(mydata, aes(Number of Zombies Killed, Height))
+s1
+p <- ggplot(data = s1, aes(x = height, y = zombies_killed))
 
+#error because ggplot2 cannot make a graph with the data of class character 
+``` 
+#Quiz #3
+pull in zombie data set
+pull out all medical/nursing majors 
+relationship between age and years of education
+years as education as continuous variable
+plot 
+regression 95%
+males are pink
+females are blue
+
+```{r}
+library(curl)
+f <- f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN597_Fall17/zombies.csv")
+d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
+head(d)
+
+library(dplyr)
+dt<-as.data.frame(d)
+dt
+
+g<-data.frame(dt, dt$gender, dt$years_of_education, dt$major, dt$age)
+g
+as.factor(g$gender)
+#making gender a factor so that I can color it
+
+```
+```{r}
+library(ggplot2)
+p <- ggplot(data = g, aes(x = age, y = years_of_education), xlab("Age"), ylab("Years of Education")) +
+  geom_point(aes(colour=factor(gender))) +
+  geom_smooth(method ="lm", formula = y~x)
+p
+#this has not added color to the points correclty; if I add  female="blue", male="pink" this does not work 
 ```
